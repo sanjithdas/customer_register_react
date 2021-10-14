@@ -22,11 +22,7 @@ const remove = id => {
 };
 
 const removeAll = () => {
-  return http.delete(`/tutorials`);
-};
-
-const findByTitle = title => {
-  return http.get(`/tutorials?title=${title}`);
+  return http.delete(`/customers`);
 };
 
 const getIndividualContacts = (contact_id) =>{
@@ -41,8 +37,7 @@ export default {
   update,
   remove,
   removeAll,
-  findByTitle,
-
+  
   getIndividualContacts
 };
 
