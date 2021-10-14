@@ -17,9 +17,7 @@ const Create = (props) => {
     customer_id:  props.match.params.id,
   })
 
-  // const  [contactForm,setContactForm] = useState({customer_id:props.match.params.id});
-
-
+  
  console.log(contactForm.customer_id);
 
   const [errors , setErrors] = useState({});
@@ -36,7 +34,7 @@ const Create = (props) => {
           
   }).options({allowUnknown: true});
 
-  const {customer_id, address,city,pincode,work_phone} = contactForm;
+  const { address,city,pincode,work_phone} = contactForm;
 
   const validate = () => {
      
@@ -72,7 +70,6 @@ const Create = (props) => {
        delete errors[e.currentTarget.name];
      }
     
-     
       setContactForm({
         ...contactForm,
           [e.target.name]: e.target.value
@@ -80,13 +77,11 @@ const Create = (props) => {
 
        setErrors(errors);
   
-     
    }
 
    const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validate();
-    console.log(errors);
     setErrors(errors);
     
    if (errors) return;

@@ -49,7 +49,7 @@ const Customer = (props) => {
 
   const validateInput = (currentTarget) => {
     
-      const object = { [currentTarget.name]: currentTarget.value };
+     const object = { [currentTarget.name]: currentTarget.value };
      const result = schema.validate(object);
      
      if (!result.error) return null;
@@ -65,22 +65,17 @@ const Customer = (props) => {
      } else {
        delete errors[e.currentTarget.name];
      }
-    
-     
-      setCustomerForm({
+       setCustomerForm({
         ...customerForm,
           [e.target.name]: e.target.value
       })
-
        setErrors(errors);
-  
-     
+      
    }
 
    const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validate();
-    console.log(errors);
     setErrors(errors);
     
    if (errors) return;
@@ -96,21 +91,14 @@ const Customer = (props) => {
       if (response.data.validation_errors){
         setRegistered(false);
         setBackendErrors(response.data.validation_errors); 
-      console.log(backendErrors.email);
-      }
-      
-      
+       }
+           
     }catch(error){
-      console.log('in error',error);
-
       setRegistered(false);
-    
-      
       console.log(error.response.data.errors[0])
       setErrors(error.response.data.errors[0]);
     }
   }
-
 
   return (
     <div className="container mt-5 card">
@@ -120,7 +108,7 @@ const Customer = (props) => {
       <div className="card-body">
     <Form className="" onSubmit={handleSubmit}>
          
-    <Form.Group controlId="formBasicEmail">
+    <Form.Group controlId="customerCreateFormFname">
       <Form.Label className="fa-2x">First name</Form.Label>
       <Form.Control type="text" name="first_name" value={first_name} placeholder="Enter first name" onChange={onHandleChange}
       />
@@ -133,13 +121,13 @@ const Customer = (props) => {
     </small>
       )}
       </span>
-      <Form.Group controlId="formBasicEmail">
+      <Form.Group controlId="customerCreateFormLname">
       <Form.Label className="fa-2x">Last name</Form.Label>
       <Form.Control type="text" name="last_name" value={last_name} placeholder="Enter last name" onChange={onHandleChange}
       />
       
     </Form.Group>              
-    <Form.Group controlId="formBasicEmail">
+    <Form.Group controlId="customerCreateFormEmail">
       <Form.Label className="fa-2x">Email address</Form.Label>
       <Form.Control type="email" name="email" value={email} placeholder="Enter email"  onChange={onHandleChange} />
       
@@ -160,7 +148,7 @@ const Customer = (props) => {
         )}
       </span>    
 
-      <Form.Group controlId="formBasicEmail">
+      <Form.Group controlId="customerCreateFormPhone">
       <Form.Label className="fa-2x">Phone:</Form.Label>
       <Form.Control type="text" name="phone" value={phone} placeholder="Enter phone number" onChange={onHandleChange}  />
       
@@ -181,21 +169,9 @@ const Customer = (props) => {
     </div>
 
     <ul>
-    {/* {Object.keys(errors).map((error, index) => (
-        <Error
-            message={errors[error][0]}
-            key={index}
-        />
-    ))} */}
+   
 </ul>
-
-    <span style={{ color: "red" }} className="mr-5 mt-5">
-        {registered && (
-        <small className="alert alert-success font-weight-bold text-center">
-          Successfully registered...
-        </small>
-        )}
-      </span>
+    
   </Form>
   <Link to={'/customers'}
             className="btn-small m-1 btn btn-primary link-class"

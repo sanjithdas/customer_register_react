@@ -21,8 +21,7 @@ const EditCustomer = (props) => {
     CustomerServices.get(id)
       .then(response => {
         setCustomerForm(response.data);
-        console.log(response.data);
-      })
+       })
       .catch(e => {
         console.log(e);
       });
@@ -43,7 +42,7 @@ const EditCustomer = (props) => {
        
   }).options({allowUnknown: true});
 
-  const {id,first_name,last_name,email,phone} = customerForm;
+  const {first_name,last_name,email,phone} = customerForm;
 
   const validate = () => {
      
@@ -56,7 +55,7 @@ const EditCustomer = (props) => {
     result.error.details.map((item) => {
       return (errors[item.path[0]] = item.message);
     });
-    console.log(errors);
+   
     return errors;
   };
 
@@ -72,7 +71,7 @@ const EditCustomer = (props) => {
 
    const onHandleChange = (e) =>{
      const errorMsg = validateInput(e.currentTarget);
-     console.log(errorMsg);    
+      
      if (errorMsg) {
        errors[e.currentTarget.name] = errorMsg;
      } else {
@@ -86,14 +85,11 @@ const EditCustomer = (props) => {
 
        setErrors(errors);
   
-     
    }
-  // const [id,first_name,last_name] = customerForm;
-
+  
    const handleUpdate = (e) => {
     e.preventDefault();
     const errors = validate();
-    console.log(customerForm.id);
     setErrors(errors);
     
    if (errors) return;
@@ -109,104 +105,95 @@ const EditCustomer = (props) => {
       if (response.data.validation_errors){
         setRegistered(false);
         setBackendErrors(response.data.validation_errors); 
-      console.log(backendErrors.email);
+       }
+     }catch(error){
+       setRegistered(false);
       }
-      
-      
-    }catch(error){
-      console.log('in error',error);
-      setRegistered(false);
-      // console.log(error.response.data.errors[0])
-      // setErrors(error.response.data.errors[0]);
-    }
   }
-
-
   return (
-    
-    <div className="container mt-5 card">
+      <div className="container mt-5 card">
       <div className="card-header mt-6">
          <h2>Edit Customer</h2>
       </div>
       <div className="card-body">
     <Form className="" onSubmit={handleUpdate}>
          
-    <Form.Group controlId="formBasicEmail">
-      <Form.Label className="fa-2x">First name</Form.Label>
-      <Form.Control type="text" name="first_name" value={first_name} placeholder="Enter first name" onChange={onHandleChange}
-      />
-      
-    </Form.Group>
-    <span>
-    {errors && errors.first_name && (
-    <small className="alert-danger font-weight-bold">
-      {errors.first_name}
-    </small>
-      )}
-      </span>
       <Form.Group controlId="formBasicEmail">
-      <Form.Label className="fa-2x">Last name</Form.Label>
-      <Form.Control type="text" name="last_name" value={last_name} placeholder="Enter last name" onChange={onHandleChange}
-      />
-      
-    </Form.Group>              
-    <Form.Group controlId="formBasicEmail">
-      <Form.Label className="fa-2x">Email address</Form.Label>
-      <Form.Control type="email" name="email" value={email} placeholder="Enter email"  onChange={onHandleChange} />
-      
-    </Form.Group>
-      <span style={{ color: "red" }}>
-        {errors && errors.email && (
-        <small className="alert-danger font-weight-bold">
-          {errors.email}
-        </small>
-        )}
-      </span>
-
-      <span style={{ color: "red" }}>
-        {backendErrors && backendErrors.email && (
-        <small className="alert-danger font-weight-bold">
-          {backendErrors.email}
-        </small>
-        )}
-      </span>    
-
-      <Form.Group controlId="formBasicEmail">
-      <Form.Label className="fa-2x">Phone:</Form.Label>
-      <Form.Control type="text" name="phone" value={phone} placeholder="Enter phone number" onChange={onHandleChange}  />
-      
-    </Form.Group>
-     
-    <span style={{ color: "red" }}>
-        {errors && errors.phone && (
-        <small className="alert-danger font-weight-bold">
-          {errors.phone}
-        </small>
-        )}
-      </span>
-    
-    <div className="mt-5">
-    <Button variant="primary" type="submit" className="mt-16">
-      Edit
-    </Button>
-    </div>
-
-    <ul>
-    {/* {Object.keys(errors).map((error, index) => (
-        <Error
-            message={errors[error][0]}
-            key={index}
+        <Form.Label className="fa-2x">First name</Form.Label>
+        <Form.Control type="text" name="first_name" value={first_name} placeholder="Enter first name" onChange={onHandleChange}
         />
-    ))} */}
-</ul>
-
-    <span style={{ color: "red" }} className="mr-5 mt-5">
-        {registered && (
-        <small className="alert alert-success font-weight-bold text-center">
-          Successfully registered...
-        </small>
+        
+      </Form.Group>
+      <span>
+      {errors && errors.first_name && (
+      <small className="alert-danger font-weight-bold">
+        {errors.first_name}
+      </small>
         )}
-      </span>
+        </span>
+        <Form.Group controlId="formBasicEmail">
+        <Form.Label className="fa-2x">Last name</Form.Label>
+        <Form.Control type="text" name="last_name" value={last_name} placeholder="Enter last name" onChange={onHandleChange}
+        />
+        
+      </Form.Group>              
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label className="fa-2x">Email address</Form.Label>
+        <Form.Control type="email" name="email" value={email} placeholder="Enter email"  onChange={onHandleChange} />
+        
+      </Form.Group>
+        <span style={{ color: "red" }}>
+          {errors && errors.email && (
+          <small className="alert-danger font-weight-bold">
+            {errors.email}
+          </small>
+          )}
+        </span>
+
+        <span style={{ color: "red" }}>
+          {backendErrors && backendErrors.email && (
+          <small className="alert-danger font-weight-bold">
+            {backendErrors.email}
+          </small>
+          )}
+        </span>    
+
+        <Form.Group controlId="formBasicEmail">
+        <Form.Label className="fa-2x">Phone:</Form.Label>
+        <Form.Control type="text" name="phone" value={phone} placeholder="Enter phone number" onChange={onHandleChange}  />
+        
+      </Form.Group>
+      
+      <span style={{ color: "red" }}>
+          {errors && errors.phone && (
+          <small className="alert-danger font-weight-bold">
+            {errors.phone}
+          </small>
+          )}
+        </span>
+      
+      <div className="mt-5">
+      <Button variant="primary" type="submit" className="mt-16">
+        Edit
+      </Button>
+      </div>
+
+      <ul>
+      {/* {Object.keys(errors).map((error, index) => (
+          <Error
+              message={errors[error][0]}
+              key={index}
+          />
+      ))} */}
+  </ul>
+
+      <span style={{ color: "red" }} className="mr-5 mt-5">
+          {registered && (
+          <small className="alert alert-success font-weight-bold text-center">
+            Successfully registered...
+          </small>
+          )}
+        </span>
   </Form>
   <Link to={'/customers'}
             className="btn-small m-1 btn btn-primary link-class"

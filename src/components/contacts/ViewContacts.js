@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import CustomerService from '../../services/CustomerServices';
-//import SingleCustomer from './SingleCustomer';
 import 'jquery/dist/jquery.min.js';
-//Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
 import jQuery from "jquery";
@@ -20,7 +18,7 @@ import 'datatables.net-buttons';
    componentDidMount(){
    this.getContacts();
    setTimeout(()=>{
-    let table = jQuery("#example2").DataTable({
+     jQuery("#view_contact_id").DataTable({
      });
   },1000)
    }
@@ -33,7 +31,7 @@ import 'datatables.net-buttons';
       .catch(e => {
         console.log(e);
       });
-    //  console.log(this.state.customers);
+    
   };
 
   render() {
@@ -41,13 +39,13 @@ import 'datatables.net-buttons';
    
     return (
       <div className="container mt-5">  
-        <div className="row" className="hdr">    
+        <div className="row">    
           <div className="col-sm-12 btn btn-info">    
           Contacts Listing  
             </div>    
             </div>    
           <div  style={{ marginTop: 20 }}>  
-          <table id="example2" className="table table-bordered table-hover table-striped">
+          <table id="view_contact_id" className="table table-bordered table-hover table-striped">
                <thead>
                  <tr>
                    <th>Customer ID</th>

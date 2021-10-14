@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import '../services/CustomerServices'
 
 import CustomerServices from '../services/CustomerServices';
 const SingleCustomer = ({id,first_name,last_name,email,phone, add_contacts, edit, delete_customer ,view_contacts ,props }) => {
-
-  const [deletestatus , setDeleteStatus] = useState(false);
-
+  
   const removeCustomer = (id,e) =>{
       
     const confirm = window.confirm('Do you want to delete the record?');
@@ -16,18 +14,15 @@ const SingleCustomer = ({id,first_name,last_name,email,phone, add_contacts, edit
       
       CustomerServices.remove(id)
       .then(response =>{
-        setDeleteStatus(true);
         toast.success("Customer deleted successfully")
         props.history.push("/customers");
       })
       .catch(e => {
         console.log(e);
       })
-  }
+   }
    
   }
-
-
   return (
     <>
     <tr key={id}>
